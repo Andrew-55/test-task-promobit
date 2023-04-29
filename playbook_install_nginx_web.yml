@@ -1,0 +1,7 @@
+---
+- name: Install Nginx Web server and Upload Web Page
+  hosts: install_nginx_web
+  become: yes
+
+  roles:
+    - { role: deploy_nginx_web, when: ansible_os_family == "Debian"}

@@ -1,0 +1,18 @@
+---
+# tasks file for deploy_nginx_web
+
+- name: Install Nginx WebServer
+  apt: 
+    name=nginx
+    state=latest
+
+- name: Copy Web Page to Server
+  copy: src={{item}} dest={{destin_folder}} mode=0555
+  with_fileglob: "*"
+  notify: Restart Nginx
+
+- name: Start Nginx and Enable in on the every boot
+  service:
+    name=nginx
+    state=started
+    enabled=yes
